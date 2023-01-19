@@ -8,7 +8,7 @@ const { BeautyModel } = require("../model/Beauty.model");
 
 beautyRouter.get("/", async(req, res) => {
   //verify here
-  const notes = await BeautyModel.find().limit(50)
+  const notes = await BeautyModel.find()
   res.send(notes);
 });
 ////////////logged

@@ -6,9 +6,14 @@ const beautyRouter = express.Router();
 const { BeautyModel } = require("../model/Beauty.model");
 
 
-beautyRouter.get("/", async(req, res) => {
+beautyRouter.get("/", async (req, res) => {
   //verify here
-  const notes = await BeautyModel.find()
+  var limit = req.query.limit;
+  if (limit) {
+    const notes = await BeautyModel.find().limit(limit);
+    res.send(notes);
+  }
+  const notes = await BeautyModel.find();
   res.send(notes);
 });
 ////////////logged

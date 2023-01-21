@@ -9,19 +9,28 @@ beautyRouter.get("/", async (req, res) => {
   var limit = req.query.limit;
   var page = req.query.page;
   var page = req.query.page;
+  var category = req.query.category;
+  var subcategory = req.query.subcategory;
+  var color = req.query.color;
+  var brand = req.query.brand;
+  var sort = req.query.sort;
+ 
 
-  if (limit) {
-    const notes = await BeautyModel.find()
+  // if (limit) {
+    // const notes = await BeautyModel.find()
+    const notes = await BeautyModel.find({ $and:[{"category": category},{"subcategory":subcategory},{"color":color},{"brand":brand}]})
       .limit(limit)
-      .skip(limit * page);
+      .skip(limit * page)
+      .sort({"rating":sort})
     res.send(notes);
-  } else {
-    const notes = await BeautyModel.find()
-      .limit(10)
-      .skip(10 * 1);
-    res.send(notes);
-  }
+  // } else {
+  //   const notes = await BeautyModel.find({ $and:[{"category": !null?(""||null):category},{"subcategory":null?(""||null):subcategory}]})
+  //     .limit(10)
+  //     .skip(50 * page);
+  //   res.send(notes);
+  // }
 });
+// {"category": category},{"color":"Yellow" },
 
 beautyRouter.get("/:id", async (req, res) => {
   //verify here

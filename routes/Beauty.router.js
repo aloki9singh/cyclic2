@@ -9,14 +9,25 @@ beautyRouter.get("/", async (req, res) => {
   var limit = req.query.limit;
   var page = req.query.page;
   var page = req.query.page;
-  
+
   if (limit) {
-    const notes = await BeautyModel.find().limit(limit).skip(limit*page);
+    const notes = await BeautyModel.find()
+      .limit(limit)
+      .skip(limit * page);
     res.send(notes);
   } else {
-    const notes = await BeautyModel.find().limit(10).skip(10*1)
+    const notes = await BeautyModel.find()
+      .limit(10)
+      .skip(10 * 1);
     res.send(notes);
   }
+});
+
+beautyRouter.get("/:id", async (req, res) => {
+  //verify here
+  var id = req.params.id;
+  const item = await BeautyModel.findById(id);
+  res.send(item);
 });
 ////////////logged
 beautyRouter.post("/create", async (req, res) => {

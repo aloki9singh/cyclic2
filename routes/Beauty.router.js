@@ -18,7 +18,7 @@ beautyRouter.get("/", async (req, res) => {
 
   // if (limit) {
     // const notes = await BeautyModel.find()
-    const notes = await BeautyModel.find({ $and:[{"category": category},{"subcategory":subcategory},{"color":color},{"brand":brand}]})
+    const notes = await BeautyModel.find({ $or:[{"category": category},{"subcategory":subcategory},{"color":color},{"brand":brand}]})
       .limit(limit)
       .skip(limit * page)
       .sort({"rating":sort})
